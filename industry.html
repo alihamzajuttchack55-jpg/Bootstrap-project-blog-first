@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <title>Industry Insights - Company Name</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Industry Insights Page Specific Styles */
+        .industry-header {
+            padding: 100px 0 50px;
+            background: linear-gradient(135deg, rgba(78, 84, 200, 0.8) 0%, rgba(143, 148, 251, 0.8) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .industry-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .industry-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .industry-content {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .industry-filters {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .industry-filter-btn {
+            background: white;
+            border: 2px solid #4e54c8;
+            color: #4e54c8;
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin: 0 5px 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .industry-filter-btn:hover, .industry-filter-btn.active {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+        }
+        
+        .industry-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .industry-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .industry-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .industry-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .industry-card:hover .industry-img img {
+            transform: scale(1.1);
+        }
+        
+        .industry-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .industry-content-card {
+            padding: 25px;
+        }
+        
+        .industry-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .industry-title {
+            color: #2c2c54;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .industry-excerpt {
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .industry-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+        
+        .industry-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .industry-author-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .industry-author-name {
+            color: #2c2c54;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .industry-read-more {
+            color: #4e54c8;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .industry-read-more:hover {
+            color: #ff6b6b;
+            transform: translateX(5px);
+        }
+        
+        .industry-read-more i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .industry-pagination {
+            margin-top: 50px;
+            justify-content: center;
+        }
+        
+        .industry-page-link {
+            color: #4e54c8;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 0.9rem;
+            margin: 0 3px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .industry-page-link:hover {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            border-color: #4e54c8;
+        }
+        
+        .industry-page-item.active .industry-page-link {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            border-color: #4e54c8;
+            color: white;
+        }
+        
+        /* Featured Article */
+        .industry-featured-article {
+            margin-bottom: 50px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .industry-featured-img {
+            height: 350px;
+            overflow: hidden;
+        }
+        
+        .industry-featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .industry-featured-content {
+            padding: 30px;
+        }
+        
+        .industry-featured-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .industry-featured-title {
+            color: #2c2c54;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .industry-featured-excerpt {
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Newsletter Section */
+        .industry-newsletter {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+            margin: 60px 0;
+            border-radius: 10px;
+        }
+        
+        .industry-newsletter h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .industry-newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .industry-newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+        }
+        
+        .industry-newsletter-form input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+        }
+        
+        .industry-newsletter-form button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 50px 50px 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .industry-newsletter-form button:hover {
+            background: #e55c5c;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .industry-img {
+                height: 180px;
+            }
+            
+            .industry-title {
+                font-size: 1.2rem;
+            }
+            
+            .industry-featured-img {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .industry-header {
+                padding: 80px 0 40px;
+            }
+            
+            .industry-header h1 {
+                font-size: 2rem;
+            }
+            
+            .industry-content {
+                padding: 40px 0;
+            }
+            
+            .industry-filters {
+                margin-bottom: 30px;
+            }
+            
+            .industry-filter-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .industry-featured-title {
+                font-size: 1.5rem;
+            }
+            
+            .industry-newsletter-form {
+                flex-direction: column;
+            }
+            
+            .industry-newsletter-form input {
+                border-radius: 50px;
+                margin-bottom: 10px;
+            }
+            
+            .industry-newsletter-form button {
+                border-radius: 50px;
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .industry-img {
+                height: 160px;
+            }
+            
+            .industry-content-card {
+                padding: 20px;
+            }
+            
+            .industry-title {
+                font-size: 1.1rem;
+            }
+            
+            .industry-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .industry-read-more {
+                margin-top: 10px;
+            }
+            
+            .industry-featured-content {
+                padding: 20px;
+            }
+            
+            .industry-featured-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="container"> 
+            <div class="row py-3">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                        <a href="home.html" class="navbar-brand">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1/1560.png" alt="Logo" height="30px" width="30px" class="mr-2">
+                            Company Name
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a href="home.html" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="contact.html" class="nav-link">Contact us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">Privacy</a>
+                                </li>
+                                <li class="nav-item dropdown active">
+                                    <a href="blog.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
+                                    <div class="dropdown-menu">
+                                        <a href="tech.html" class="dropdown-item">Tech News</a>
+                                        <a href="industry.html" class="dropdown-item active">Industry Insights</a>
+                                        <a href="updates.html" class="dropdown-item">Company Updates</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="blog.html" class="dropdown-item">All Categories</a>
+                                    </div>
+                                </li>
+                            </ul> 
+                            <form class="form-inline">
+                                <input type="search" class="form-control mr-sm-2" placeholder="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Industry Insights Header -->
+    <section class="industry-header">
+        <div class="container">
+            <h1>Industry Insights</h1>
+            <p>Expert analysis and perspectives on the latest trends and developments across various industries</p>
+        </div>
+    </section>
+
+    <!-- Industry Insights Content -->
+    <section class="industry-content">
+        <div class="container">
+            <!-- Industry Insights Filters -->
+            <div class="industry-filters">
+                <button class="industry-filter-btn active">All Industries</button>
+                <button class="industry-filter-btn">Technology</button>
+                <button class="industry-filter-btn">Healthcare</button>
+                <button class="industry-filter-btn">Finance</button>
+                <button class="industry-filter-btn">Manufacturing</button>
+                <button class="industry-filter-btn">Retail</button>
+            </div>
+
+            <!-- Featured Article -->
+            <div class="industry-featured-article">
+                <div class="industry-featured-img">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Digital Transformation">
+                </div>
+                <div class="industry-featured-content">
+                    <span class="industry-featured-badge">Featured</span>
+                    <h2 class="industry-featured-title">The Future of Digital Transformation Across Industries</h2>
+                    <p class="industry-featured-excerpt">Digital transformation is reshaping traditional business models across all sectors. Discover how companies are leveraging technology to innovate, optimize operations, and create new value propositions in an increasingly competitive landscape.</p>
+                    <div class="industry-meta">
+                        <div class="industry-author">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="industry-author-img">
+                            <span class="industry-author-name">Emily Johnson</span>
+                        </div>
+                        <a href="#" class="industry-read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Industry Insight 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="industry-card">
+                        <div class="industry-img">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Healthcare Innovation">
+                            <span class="industry-category">Healthcare</span>
+                        </div>
+                        <div class="industry-content-card">
+                            <span class="industry-date"><i class="far fa-calendar me-2"></i>August 15, 2023</span>
+                            <h3 class="industry-title">Revolutionizing Patient Care with AI and Telemedicine</h3>
+                            <p class="industry-excerpt">Explore how healthcare providers are implementing AI-driven diagnostics and telemedicine solutions to improve patient outcomes and accessibility while reducing costs.</p>
+                            <div class="industry-meta">
+                                <div class="industry-author">
+                                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="industry-author-img">
+                                    <span class="industry-author-name">Dr. Sarah Williams</span>
+                                </div>
+                                <a href="#" class="industry-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Insight 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="industry-card">
+                        <div class="industry-img">
+                            <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Sustainable Manufacturing">
+                            <span class="industry-category">Manufacturing</span>
+                        </div>
+                        <div class="industry-content-card">
+                            <span class="industry-date"><i class="far fa-calendar me-2"></i>August 12, 2023</span>
+                            <h3 class="industry-title">The Rise of Sustainable Manufacturing Practices</h3>
+                            <p class="industry-excerpt">Learn how manufacturers are adopting circular economy principles, reducing waste, and implementing energy-efficient processes to meet sustainability goals.</p>
+                            <div class="industry-meta">
+                                <div class="industry-author">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="industry-author-img">
+                                    <span class="industry-author-name">Michael Roberts</span>
+                                </div>
+                                <a href="#" class="industry-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Insight 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="industry-card">
+                        <div class="industry-img">
+                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Financial Technology">
+                            <span class="industry-category">Finance</span>
+                        </div>
+                        <div class="industry-content-card">
+                            <span class="industry-date"><i class="far fa-calendar me-2"></i>August 10, 2023</span>
+                            <h3 class="industry-title">Fintech Disruption: Traditional Banking's Response to Digital Challenges</h3>
+                            <p class="industry-excerpt">Examine how traditional financial institutions are adapting to the rise of fintech companies, blockchain technology, and changing consumer expectations.</p>
+                            <div class="industry-meta">
+                                <div class="industry-author">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="industry-author-img">
+                                    <span class="industry-author-name">David Chen</span>
+                                </div>
+                                <a href="#" class="industry-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Insight 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="industry-card">
+                        <div class="industry-img">
+                            <img src="https://images.unsplash.com/photo-1563014959-7aaa83350992?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Retail Transformation">
+                            <span class="industry-category">Retail</span>
+                        </div>
+                        <div class="industry-content-card">
+                            <span class="industry-date"><i class="far fa-calendar me-2"></i>August 8, 2023</span>
+                            <h3 class="industry-title">The Future of Retail: Blending Physical and Digital Experiences</h3>
+                            <p class="industry-excerpt">Discover how retailers are creating seamless omnichannel experiences, leveraging AR/VR technologies, and using data analytics to personalize customer interactions.</p>
+                            <div class="industry-meta">
+                                <div class="industry-author">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="industry-author-img">
+                                    <span class="industry-author-name">Lisa Anderson</span>
+                                </div>
+                                <a href="#" class="industry-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Insight 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="industry-card">
+                        <div class="industry-img">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Supply Chain">
+                            <span class="industry-category">Logistics</span>
+                        </div>
+                        <div class="industry-content-card">
+                            <span class="industry-date"><i class="far fa-calendar me-2"></i>August 5, 2023</span>
+                            <h3 class="industry-title">Building Resilient Supply Chains in a Post-Pandemic World</h3>
+                            <p class="industry-excerpt">Learn how companies are rethinking their supply chain strategies, incorporating AI-powered forecasting, and developing contingency plans for future disruptions.</p>
+                            <div class="industry-meta">
+                                <div class="industry-author">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="industry-author-img">
+                                    <span class="industry-author-name">James Wilson</span>
+                                </div>
+                                <a href="#" class="industry-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Insight 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="industry-card">
+                        <div class="industry-img">
+                            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Energy Sector">
+                            <span class="industry-category">Energy</span>
+                        </div>
+                        <div class="industry-content-card">
+                            <span class="industry-date"><i class="far fa-calendar me-2"></i>August 3, 2023</span>
+                            <h3 class="industry-title">The Transition to Renewable Energy: Challenges and Opportunities</h3>
+                            <p class="industry-excerpt">Explore the economic, technical, and regulatory challenges facing the global transition to renewable energy sources and the opportunities for innovation.</p>
+                            <div class="industry-meta">
+                                <div class="industry-author">
+                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="industry-author-img">
+                                    <span class="industry-author-name">Robert Kim</span>
+                                </div>
+                                <a href="#" class="industry-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="industry-newsletter">
+                <h3>Stay Updated with Industry Insights</h3>
+                <p>Subscribe to our newsletter and never miss the latest industry trends, analysis, and expert perspectives.</p>
+                <form class="industry-newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Industry Insights pagination">
+                <ul class="pagination industry-pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link industry-page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link industry-page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link industry-page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link industry-page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link industry-page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4"> 
+                    <h4>Contact us</h4>
+                    <p><i class="fa-solid fa-house"></i>111 Main street, kot radha kishan Lahore</p>
+                    <p><i class="fa-solid fa-envelope"></i>alihamzajuttchack55@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i>03706114094</p>
+                    <p><i class="fa-solid fa-globe"></i>www.company.com</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4>About us</h4>
+                    <p><i class="fa-solid fa-square-caret-right"></i>About us</p>
+                    <p><i class="fa-solid fa-square-caret-right"></i>Contact us</p>
+                    <p><i class="fa-solid fa-square-caret-right"></i>Term & Condition</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4>Stay in Touch</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <textarea name="subscribe" placeholder="Subscribe for our newsletter"></textarea>
+                    <button class="btn btn-primary">Sign up</button>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Company Name. All Rights Reserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <script>
+        // Add scroll event to change navbar style
+        $(window).scroll(function() {
+            if($(window).scrollTop() > 50) {
+                $('.navbar').addClass('navbar-scrolled');
+            } else {
+                $('.navbar').removeClass('navbar-scrolled');
+            }
+        });
+        
+        // Filter button functionality
+        $('.industry-filter-btn').click(function() {
+            $('.industry-filter-btn').removeClass('active');
+            $(this).addClass('active');
+            // Here you would typically filter the industry insights
+            console.log('Filtering by: ' + $(this).text());
+        });
+        
+        // Add smooth scrolling to all links
+        $("a").on('click', function(event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function(){
+                    window.location.hash = hash;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

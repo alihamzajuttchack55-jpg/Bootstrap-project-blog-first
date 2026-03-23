@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <title>Web Development - Company Name</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .webdev-header {
+            padding: 100px 0 50px;
+            background: linear-gradient(135deg, rgba(78, 84, 200, 0.8) 0%, rgba(143, 148, 251, 0.8) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .webdev-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .webdev-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .webdev-filters {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .webdev-filter-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            text-align: left;
+            border: none;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .webdev-filter-btn:hover, .webdev-filter-btn.active {
+            background-color: #007bff;
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .webdev-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .webdev-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .webdev-img {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .webdev-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .webdev-card:hover .webdev-img img {
+            transform: scale(1.05);
+        }
+        
+        .webdev-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .webdev-content-card {
+            padding: 20px;
+        }
+        
+        .webdev-date {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .webdev-title {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #343a40;
+            font-weight: 600;
+        }
+        
+        .webdev-excerpt {
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .webdev-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .webdev-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .webdev-author-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .webdev-author-name {
+            font-size: 14px;
+            color: #495057;
+        }
+        
+        .webdev-read-more {
+            color: #007bff;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .webdev-read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .topic-section {
+            margin-bottom: 50px;
+        }
+        
+        .topic-heading {
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+            color: #343a40;
+            font-weight: 700;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .social-links a {
+            color: white;
+            margin-right: 15px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="container"> 
+            <div class="row py-3">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                        <a href="home.html" class="navbar-brand">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1/1560.png" alt="Logo" height="30px" width="30px" class="mr-2">
+                            Company Name
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a href="home.html" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item ">
+                                  <a href="contact.html" class="nav-link">Contact us</a>
+                                   
+                                </li>
+                                <li class="nav-item">
+                                    <a href="About.html" class="nav-link">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="privacy.html" class="nav-link">Privacy</a>
+                                </li>
+                                <li class="nav-item dropdown active">
+                                    <a href="blog.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
+                                    <div class="dropdown-menu">
+                                        <a href="tech.html" class="dropdown-item">Tech News</a>
+                                        <a href="industry.html" class="dropdown-item">Industry Insights</a>
+                                        <a href="webdev.html" class="dropdown-item active">Web Development</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="blog.html" class="dropdown-item">All Categories</a>
+                                    </div>
+                                </li>
+                            </ul> 
+                            <form class="form-inline">
+                                <input type="search" class="form-control mr-sm-2" placeholder="Search">
+                                <button class="btn btn-outline-light my-2 my-sm-0">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Web Development Header -->
+    <section class="webdev-header">
+        <div class="container">
+            <h1>Web Development</h1>
+            <p>Latest trends, techniques, and best practices in modern web development</p>
+        </div>
+    </section>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Sidebar with filters -->
+            <div class="col-md-3">
+                <div class="webdev-filters">
+                    <div><button class="webdev-filter-btn active" data-category="all">All Topics</button></div>
+                    <div><button class="webdev-filter-btn" data-category="frontend">Frontend</button></div>
+                    <div><button class="webdev-filter-btn" data-category="backend">Backend</button></div>
+                    <div><button class="webdev-filter-btn" data-category="frameworks">Frameworks</button></div>
+                    <div><button class="webdev-filter-btn" data-category="performance">Performance</button></div>
+                    <div><button class="webdev-filter-btn" data-category="security">Security</button></div>
+                </div>
+            </div>
+            
+            <!-- Content area -->
+            <div class="col-md-9">
+                <!-- Frontend Section -->
+                <section id="frontend" class="topic-section">
+                    <h2 class="topic-heading">Frontend Development</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="React Framework">
+                                    <span class="webdev-category">Frontend</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>September 12, 2023</span>
+                                    <h3 class="webdev-title">React 18: New Features and Performance Improvements</h3>
+                                    <p class="webdev-excerpt">Discover the latest enhancements in React 18, including concurrent features, automatic batching, and new APIs that improve developer experience and application performance.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">Michael Chen</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Backend Section -->
+                <section id="backend" class="topic-section">
+                    <h2 class="topic-heading">Backend Development</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Node.js Development">
+                                    <span class="webdev-category">Backend</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>September 10, 2023</span>
+                                    <h3 class="webdev-title">Building Scalable APIs with Node.js and Express</h3>
+                                    <p class="webdev-excerpt">Learn best practices for creating robust, scalable RESTful APIs using Node.js and Express, including authentication, validation, error handling, and performance optimization.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">James Wilson</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Frameworks Section -->
+                <section id="frameworks" class="topic-section">
+                    <h2 class="topic-heading">Frameworks</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Vue.js Framework">
+                                    <span class="webdev-category">Frameworks</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>August 28, 2023</span>
+                                    <h3 class="webdev-title">Vue.js 3 Composition API: A Complete Guide</h3>
+                                    <p class="webdev-excerpt">Explore the new Composition API in Vue.js 3 and learn how it provides better code organization, logic reuse, and TypeScript support compared to the Options API.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">Sarah Johnson</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Next.js Framework">
+                                    <span class="webdev-category">Frameworks</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>August 20, 2023</span>
+                                    <h3 class="webdev-title">Next.js 13: Server Components and App Router</h3>
+                                    <p class="webdev-excerpt">Dive into the latest features of Next.js 13, including the new App Router, React Server Components, and streaming rendering for improved performance and SEO.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">David Kim</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Performance Section -->
+                <section id="performance" class="topic-section">
+                    <h2 class="topic-heading">Performance Optimization</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Web Performance">
+                                    <span class="webdev-category">Performance</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>August 15, 2023</span>
+                                    <h3 class="webdev-title">Core Web Vitals: Optimization Strategies</h3>
+                                    <p class="webdev-excerpt">Learn practical techniques to improve your website's Core Web Vitals scores, including LCP, FID, and CLS optimization for better user experience and SEO rankings.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">Emily Rodriguez</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Lazy Loading">
+                                    <span class="webdev-category">Performance</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>August 8, 2023</span>
+                                    <h3 class="webdev-title">Advanced Lazy Loading Techniques for Modern Web</h3>
+                                    <p class="webdev-excerpt">Discover how to implement effective lazy loading strategies for images, components, and JavaScript to significantly improve page load times and user experience.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1590086782792-42dd2350140d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">Alex Turner</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Security Section -->
+                <section id="security" class="topic-section">
+                    <h2 class="topic-heading">Web Security</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Web Security">
+                                    <span class="webdev-category">Security</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>August 3, 2023</span>
+                                    <h3 class="webdev-title">Modern Web Application Security Best Practices</h3>
+                                    <p class="webdev-excerpt">Explore essential security practices for web applications, including protection against XSS, CSRF, SQL injection, and other common vulnerabilities in modern web development.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">Marcus Brown</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="webdev-card">
+                                <div class="webdev-img">
+                                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="JWT Security">
+                                    <span class="webdev-category">Security</span>
+                                </div>
+                                <div class="webdev-content-card">
+                                    <span class="webdev-date"><i class="far fa-calendar me-2"></i>July 27, 2023</span>
+                                    <h3 class="webdev-title">Secure Authentication with JWT: Implementation Guide</h3>
+                                    <p class="webdev-excerpt">Learn how to implement secure JSON Web Token authentication in your web applications, including best practices for token storage, refresh strategies, and security considerations.</p>
+                                    <div class="webdev-meta">
+                                        <div class="webdev-author">
+                                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="webdev-author-img">
+                                            <span class="webdev-author-name">Lisa Wang</span>
+                                        </div>
+                                        <a href="#" class="webdev-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Company Name</h5>
+                    <p>Providing cutting-edge web development solutions and insights since 2010.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="home.html" class="text-white">Home</a></li>
+                        <li><a href="About.html" class="text-white">About Us</a></li>
+                        <li><a href="contact.html" class="text-white">Contact</a></li>
+                        <li><a href="privacy.html" class="text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <p class="mb-0">&copy; 2023 Company Name. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.webdev-filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    if (category === 'all') {
+                        // Show all sections
+                        document.querySelectorAll('.topic-section').forEach(section => {
+                            section.style.display = 'block';
+                        });
+                        window.scrollTo({top: 0, behavior: 'smooth'});
+                    } else {
+                        // Hide all sections first
+                        document.querySelectorAll('.topic-section').forEach(section => {
+                            section.style.display = 'none';
+                        });
+                        
+                        // Show only the selected category
+                        const targetSection = document.getElementById(category);
+                        if (targetSection) {
+                            targetSection.style.display = 'block';
+                            window.scrollTo({top: targetSection.offsetTop - 100, behavior: 'smooth'});
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

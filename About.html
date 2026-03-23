@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <title>About Us - Company Name</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* About Us Specific Styles */
+        .about-header {
+            padding: 100px 0 50px;
+            background: linear-gradient(135deg, rgba(78, 84, 200, 0.8) 0%, rgba(143, 148, 251, 0.8) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .about-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .about-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .about-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .about-section {
+            margin-bottom: 40px;
+        }
+        
+        .about-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .about-section h2 {
+            color: #4e54c8;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            position: relative;
+        }
+        
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+        }
+        
+        .founder-profile {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .founder-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .founder-name {
+            color: #2c2c54;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .founder-title {
+            color: #4e54c8;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .founder-bio {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, #4e54c8, #8f94fb);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #4e54c8;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #4e54c8;
+        }
+        
+        .timeline-date {
+            color: #4e54c8;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            color: #2c2c54;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-desc {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .skills-section {
+            margin-top: 40px;
+        }
+        
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .skill-name {
+            color: #2c2c54;
+            font-weight: 600;
+        }
+        
+        .skill-percentage {
+            color: #4e54c8;
+        }
+        
+        .skill-progress {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+            border-radius: 4px;
+        }
+        
+        .values-section {
+            margin-top: 40px;
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: #4e54c8;
+            margin-bottom: 15px;
+        }
+        
+        .value-title {
+            color: #2c2c54;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .value-desc {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .business-section {
+            margin-top: 40px;
+        }
+        
+        .business-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            background: white;
+        }
+        
+        .business-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .business-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .business-card:hover .business-img img {
+            transform: scale(1.1);
+        }
+        
+        .business-content {
+            padding: 20px;
+        }
+        
+        .business-title {
+            color: #2c2c54;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .business-desc {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .business-link {
+            color: #4e54c8;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .business-link:hover {
+            color: #ff6b6b;
+        }
+        
+        .business-link i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .about-header {
+                padding: 80px 0 40px;
+            }
+            
+            .about-header h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                padding: 40px 0;
+            }
+            
+            .about-card {
+                padding: 20px;
+            }
+            
+            .founder-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .founder-name {
+                font-size: 1.5rem;
+            }
+            
+            .about-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .about-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .about-header p {
+                font-size: 1rem;
+            }
+            
+            .about-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .timeline {
+                padding-left: 20px;
+            }
+            
+            .timeline-item::before {
+                left: -27px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="container"> 
+            <div class="row py-3">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                        <a href="home.html" class="navbar-brand">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1/1560.png" alt="Logo" height="30px" width="30px" class="mr-2">
+                            Company Name
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a href="home.html" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="contact.html" class="nav-link">Contact us</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a href="About.html" class="nav-link">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="privacy.html" class="nav-link">Privacy</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a href="blog.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
+                                    <div class="dropdown-menu">
+                                        <a href="blog.html" class="dropdown-item">Tech News</a>
+                                        <a href="blog.html" class="dropdown-item">Industry Insights</a>
+                                        <a href="company.html" class="dropdown-item">Company Updates</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="blog.html" class="dropdown-item">All Categories</a>
+                                    </div>
+                                </li>
+                            </ul> 
+                            <form class="form-inline">
+                                <input type="search" class="form-control mr-sm-2" placeholder="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Header -->
+    <section class="about-header">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>Get to know the story behind our company and the passionate individuals who make it all happen</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="about-card">
+                        <div class="about-section">
+                            <h2>Our Story</h2>
+                            <p>Founded with a vision to bridge technology and everyday needs, our company represents the unique combination of cutting-edge web development solutions and traditional business values. We believe in creating digital experiences that matter while staying grounded in real-world business needs.</p>
+                            <p>What started as a one-person operation has grown into a dedicated team of professionals committed to excellence in both the digital and business realms. Our unique perspective allows us to create solutions that are not only technologically advanced but also practical and business-focused.</p>
+                        </div>
+                        
+                        <div class="about-section">
+                            <h2>Meet Our Founder</h2>
+                            <div class="founder-profile">
+                                <img src="images/ali.jpg"  alt="Ali Hamza Jutt" class="founder-img">
+                                <h3 class="founder-name">Ali Hamza Jutt</h3>
+                                <p class="founder-title">BSCS Student, Web Developer & Business Owner</p>
+                                <p class="founder-bio">A passionate technology enthusiast and entrepreneur, Ali Hamza Jutt is currently pursuing his Bachelor's degree in Computer Science at Superior University. With a strong foundation in web development and a keen business mindset, Ali has successfully balanced his academic pursuits with entrepreneurial ventures.</p>
+                                <p class="founder-bio">His unique experience in both the technology sector and the traditional milk business gives him a distinctive perspective on how digital solutions can transform and enhance traditional business models.</p>
+                                
+                                <div class="skills-section">
+                                    <h3>Skills & Expertise</h3>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">Web Development</span>
+                                            <span class="skill-percentage">90%</span>
+                                        </div>
+                                        <div class="skill-progress">
+                                            <div class="skill-progress-bar" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">Business Management</span>
+                                            <span class="skill-percentage">85%</span>
+                                        </div>
+                                        <div class="skill-progress">
+                                            <div class="skill-progress-bar" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">Database Management</span>
+                                            <span class="skill-percentage">80%</span>
+                                        </div>
+                                        <div class="skill-progress">
+                                            <div class="skill-progress-bar" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">Customer Relations</span>
+                                            <span class="skill-percentage">88%</span>
+                                        </div>
+                                        <div class="skill-progress">
+                                            <div class="skill-progress-bar" style="width: 88%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="about-section">
+                            <h2>Journey & Milestones</h2>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">2020</div>
+                                    <div class="timeline-title">Started Academic Journey</div>
+                                    <div class="timeline-desc">Began Bachelor's degree in Computer Science at Superior University, developing a strong foundation in programming and web technologies.</div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-date">2021</div>
+                                    <div class="timeline-title">Ventured into Web Development</div>
+                                    <div class="timeline-desc">Started taking on freelance web development projects, building practical experience while studying.</div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-date">2022</div>
+                                    <div class="timeline-title">Established Milk Business</div>
+                                    <div class="timeline-desc">Launched a milk distribution business, applying technology solutions to traditional business operations.</div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-date">2023</div>
+                                    <div class="timeline-title">Founded Company Name</div>
+                                    <div class="timeline-desc">Established this company to formally offer web development services while continuing to grow the milk business.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="about-card">
+                        <div class="about-section">
+                            <h2>Our Values</h2>
+                            <div class="row values-section">
+                                <div class="col-md-6 col-lg-12">
+                                    <div class="value-item">
+                                        <div class="value-icon">
+                                            <i class="fas fa-lightbulb"></i>
+                                        </div>
+                                        <h4 class="value-title">Innovation</h4>
+                                        <p class="value-desc">We constantly explore new technologies and approaches to deliver cutting-edge solutions.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-lg-12">
+                                    <div class="value-item">
+                                        <div class="value-icon">
+                                            <i class="fas fa-handshake"></i>
+                                        </div>
+                                        <h4 class="value-title">Integrity</h4>
+                                        <p class="value-desc">We believe in honest business practices and transparent relationships with our clients.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-lg-12">
+                                    <div class="value-item">
+                                        <div class="value-icon">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                        <h4 class="value-title">Continuous Learning</h4>
+                                        <p class="value-desc">We stay updated with the latest technologies and business trends to serve you better.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-lg-12">
+                                    <div class="value-item">
+                                        <div class="value-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <h4 class="value-title">Community Focus</h4>
+                                        <p class="value-desc">We're committed to serving our community through both technology and traditional business.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="about-section business-section">
+                            <h2>Our Businesses</h2>
+                            <div class="business-card">
+                                <div class="business-img">
+                                    <img src="https://images.unsplash.com/photo-1530554764234-46bc4c73f4b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Web Development">
+                                </div>
+                                <div class="business-content">
+                                    <h4 class="business-title">Web Development Services</h4>
+                                    <p class="business-desc">We offer comprehensive web development solutions including responsive websites, web applications, and e-commerce platforms tailored to your business needs.</p>
+                                    <a href="#" class="business-link">View Services <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="business-card">
+                                <div class="business-img">
+                                    <img src="https://images.unsplash.com/photo-1561769924--47e9d6d7c3bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Milk Business">
+                                </div>
+                                <div class="business-content">
+                                    <h4 class="business-title">Milk Distribution</h4>
+                                    <p class="business-desc">Our traditional milk business provides high-quality, fresh dairy products to the local community, combining traditional values with modern business practices.</p>
+                                    <a href="#" class="business-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4"> 
+                    <h4>Contact us</h4>
+                    <p><i class="fa-solid fa-house"></i>111 Main street, kot radha kishan Lahore</p>
+                    <p><i class="fa-solid fa-envelope"></i>alihamzajuttchack55@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i>03706114094</p>
+                    <p><i class="fa-solid fa-globe"></i>www.company.com</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4>About us</h4>
+                    <p><i class="fa-solid fa-square-caret-right"></i>About us</p>
+                    <p><i class="fa-solid fa-square-caret-right"></i>Contact us</p>
+                    <p><i class="fa-solid fa-square-caret-right"></i>Term & Condition</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4>Stay in Touch</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <textarea name="subscribe" placeholder="Subscribe for our newsletter"></textarea>
+                    <button class="btn btn-primary">Sign up</button>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Company Name. All Rights Reserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <script>
+        // Add scroll event to change navbar style
+        $(window).scroll(function() {
+            if($(window).scrollTop() > 50) {
+                $('.navbar').addClass('navbar-scrolled');
+            } else {
+                $('.navbar').removeClass('navbar-scrolled');
+            }
+        });
+        
+        // Add smooth scrolling to all links
+        $("a").on('click', function(event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function(){
+                    window.location.hash = hash;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

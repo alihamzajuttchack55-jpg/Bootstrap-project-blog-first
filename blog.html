@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <title>Blog - Company Name</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Blog Page Specific Styles */
+        .blog-header {
+            padding: 100px 0 50px;
+            background: linear-gradient(135deg, rgba(78, 84, 200, 0.8) 0%, rgba(143, 148, 251, 0.8) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .blog-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .blog-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .blog-content {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .blog-filters {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid #4e54c8;
+            color: #4e54c8;
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin: 0 5px 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-img img {
+            transform: scale(1.1);
+        }
+        
+        .blog-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .blog-content-card {
+            padding: 25px;
+        }
+        
+        .blog-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .blog-title {
+            color: #2c2c54;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+        
+        .blog-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            color: #2c2c54;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .read-more {
+            color: #4e54c8;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: #ff6b6b;
+            transform: translateX(5px);
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .pagination {
+            margin-top: 50px;
+            justify-content: center;
+        }
+        
+        .page-link {
+            color: #4e54c8;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 0.9rem;
+            margin: 0 3px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            border-color: #4e54c8;
+        }
+        
+        .page-item.active .page-link {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            border-color: #4e54c8;
+            color: white;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar-widget {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .widget-title {
+            color: #2c2c54;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            position: relative;
+        }
+        
+        .widget-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+        }
+        
+        .recent-post {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .recent-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .recent-post-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .recent-post-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .recent-post-content h5 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        .recent-post-content span {
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+        
+        .categories-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .categories-list li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .categories-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .categories-list a {
+            color: #6c757d;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .categories-list a:hover {
+            color: #4e54c8;
+        }
+        
+        .categories-list span {
+            background: #f8f9fa;
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: #f8f9fa;
+            color: #6c757d;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .tag:hover {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Newsletter Widget */
+        .newsletter-form {
+            position: relative;
+        }
+        
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-form button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            padding: 7px 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(135deg, #3a40a8, #7278e0);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .blog-img {
+                height: 180px;
+            }
+            
+            .blog-title {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-header {
+                padding: 80px 0 40px;
+            }
+            
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-content {
+                padding: 40px 0;
+            }
+            
+            .blog-filters {
+                margin-bottom: 30px;
+            }
+            
+            .filter-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .sidebar {
+                margin-top: 50px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .blog-img {
+                height: 160px;
+            }
+            
+            .blog-content-card {
+                padding: 20px;
+            }
+            
+            .blog-title {
+                font-size: 1.1rem;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .read-more {
+                margin-top: 10px;
+            }
+        }
+        .blog-filters a.filter-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: white;
+    border: 2px solid #4e54c8;
+    color: #4e54c8;
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin: 0 5px 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.blog-filters a.filter-btn:hover, 
+.blog-filters a.filter-btn.active {
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="container"> 
+            <div class="row py-3">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                        <a href="home.html" class="navbar-brand">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1/1560.png" alt="Logo" height="30px" width="30px" class="mr-2">
+                            Company Name
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a href="home.html" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="About.html" class="nav-link">About us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="contact.html" class="nav-link">Contact Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="privacy.html" class="nav-link">Privacy</a>
+                                </li>
+                                <li class="nav-item dropdown active">
+    <a href="blog.html" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
+    <div class="dropdown-menu">
+        <a href="blog.html" class="dropdown-item">Tech News</a>
+        <a href="blog.html" class="dropdown-item">Industry Insights</a>
+        <a href="company.html
+        " class="dropdown-item">Company Updates</a>
+        <div class="dropdown-divider"></div>
+        <a href="blog.html" class="dropdown-item">All Categories</a>
+    </div>
+</li>
+                            </ul> 
+                            <form class="form-inline">
+                                <input type="search" class="form-control mr-sm-2" placeholder="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+        <div class="container">
+            <h1>Our Blog</h1>
+            <p>Stay updated with the latest technology trends, industry insights, and company news</p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+    <!-- Blog Filters -->
+    <div class="blog-filters">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn tech-news-btn">Tech News</button>
+    <button class="filter-btn Industry-Insights-btn ">Industry Insights</button>
+    <button class="filter-btn">Company Updates</button>
+    <button class="filter-btn web-development-btn">Web Development</button>
+    <button class="filter-btn">Mobile Apps</button>
+</div>
+
+<script>
+    // Add click event to navigate to tech.html
+    document.querySelector('.tech-news-btn').addEventListener('click', function() {
+        window.location.href = 'tech.html';
+    });
+    document.querySelector('.Industry-Insights-btn').addEventListener('click', function() {
+        window.location.href = 'industry.html';
+    });
+    document.querySelector('.web-development-btn').addEventListener('click',function(){
+        window.location.href='web-development.html';
+    });
+
+</script>  <div class="row">
+                <!-- Main Blog Content -->
+                <div class="col-lg-8">
+                    <div class="row">
+                        <!-- Blog Post 1 -->
+                        <div class="col-md-6">
+                            <div class="blog-card">
+                                <div class="blog-img">
+                                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Technology">
+                                    <span class="blog-category">Tech News</span>
+                                </div>
+                                <div class="blog-content-card">
+                                    <span class="blog-date"><i class="far fa-calendar me-2"></i>June 15, 2023</span>
+                                    <h3 class="blog-title">The Future of Artificial Intelligence in Business</h3>
+                                    <p class="blog-excerpt">Discover how AI is transforming industries and creating new opportunities for innovation and growth in the modern business landscape.</p>
+                                    <div class="blog-meta">
+                                        <div class="blog-author">
+                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="author-img">
+                                            <span class="author-name">John Smith</span>
+                                        </div>
+                                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 2 -->
+                        <div class="col-md-6">
+                            <div class="blog-card">
+                                <div class="blog-img">
+                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Data Analytics">
+                                    <span class="blog-category">Industry Insights</span>
+                                </div>
+                                <div class="blog-content-card">
+                                    <span class="blog-date"><i class="far fa-calendar me-2"></i>June 10, 2023</span>
+                                    <h3 class="blog-title">How Data Analytics is Revolutionizing Decision Making</h3>
+                                    <p class="blog-excerpt">Learn how businesses are leveraging data analytics to make informed decisions and gain competitive advantages in their markets.</p>
+                                    <div class="blog-meta">
+                                        <div class="blog-author">
+                                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="author-img">
+                                            <span class="author-name">Emily Johnson</span>
+                                        </div>
+                                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 3 -->
+                        <div class="col-md-6">
+                            <div class="blog-card">
+                                <div class="blog-img">
+                                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Web Development">
+                                    <span class="blog-category">Web Development</span>
+                                </div>
+                                <div class="blog-content-card">
+                                    <span class="blog-date"><i class="far fa-calendar me-2"></i>June 5, 2023</span>
+                                    <h3 class="blog-title">Top Web Development Trends to Watch in 2023</h3>
+                                    <p class="blog-excerpt">Explore the latest web development trends including JAMstack, serverless architecture, and progressive web apps that are shaping the future.</p>
+                                    <div class="blog-meta">
+                                        <div class="blog-author">
+                                            <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="author-img">
+                                            <span class="author-name">Michael Brown</span>
+                                        </div>
+                                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 4 -->
+                        <div class="col-md-6">
+                            <div class="blog-card">
+                                <div class="blog-img">
+                                    <img src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Mobile Apps">
+                                    <span class="blog-category">Mobile Apps</span>
+                                </div>
+                                <div class="blog-content-card">
+                                    <span class="blog-date"><i class="far fa-calendar me-2"></i>May 28, 2023</span>
+                                    <h3 class="blog-title">The Rise of Cross-Platform Mobile Development</h3>
+                                    <p class="blog-excerpt">Understand why businesses are increasingly choosing cross-platform solutions for mobile app development and the benefits they offer.</p>
+                                    <div class="blog-meta">
+                                        <div class="blog-author">
+                                            <img src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="author-img">
+                                            <span class="author-name">Sarah Williams</span>
+                                        </div>
+                                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 5 -->
+                        <div class="col-md-6">
+                            <div class="blog-card">
+                                <div class="blog-img">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Company Update">
+                                    <span class="blog-category">Company Updates</span>
+                                </div>
+                                <div class="blog-content-card">
+                                    <span class="blog-date"><i class="far fa-calendar me-2"></i>May 20, 2023</span>
+                                    <h3 class="blog-title">Our Expansion into European Markets</h3>
+                                    <p class="blog-excerpt">We're excited to announce our expansion into European markets, bringing our innovative solutions to businesses across the continent.</p>
+                                    <div class="blog-meta">
+                                        <div class="blog-author">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="author-img">
+                                            <span class="author-name">David Wilson</span>
+                                        </div>
+                                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 6 -->
+                        <div class="col-md-6">
+                            <div class="blog-card">
+                                <div class="blog-img">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cloud Computing">
+                                    <span class="blog-category">Tech News</span>
+                                </div>
+                                <div class="blog-content-card">
+                                    <span class="blog-date"><i class="far fa-calendar me-2"></i>May 15, 2023</span>
+                                    <h3 class="blog-title">The Impact of Cloud Computing on Small Businesses</h3>
+                                    <p class="blog-excerpt">Discover how cloud computing is leveling the playing field for small businesses, enabling them to compete with larger enterprises.</p>
+                                    <div class="blog-meta">
+                                        <div class="blog-author">
+                                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Author" class="author-img">
+                                            <span class="author-name">Lisa Anderson</span>
+                                        </div>
+                                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Blog pagination">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Search Widget -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Search</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search blog...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Categories</h4>
+                        <ul class="categories-list">
+                            <li><a href="#">Tech News <span>15</span></a></li>
+                            <li><a href="#">Industry Insights <span>9</span></a></li>
+                            <li><a href="#">Company Updates <span>6</span></a></li>
+                            <li><a href="#">Web Development <span>12</span></a></li>
+                            <li><a href="#">Mobile Apps <span>8</span></a></li>
+                            <li><a href="#">Database Management <span>5</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Recent Posts</h4>
+                        <div class="recent-post">
+                            <div class="recent-post-img">
+                                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Recent Post">
+                            </div>
+                            <div class="recent-post-content">
+                                <h5>The Future of Artificial Intelligence in Business</h5>
+                                <span>June 15, 2023</span>
+                            </div>
+                        </div>
+                        <div class="recent-post">
+                            <div class="recent-post-img">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Recent Post">
+                            </div>
+                            <div class="recent-post-content">
+                                <h5>How Data Analytics is Revolutionizing Decision Making</h5>
+                                <span>June 10, 2023</span>
+                            </div>
+                        </div>
+                        <div class="recent-post">
+                            <div class="recent-post-img">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Recent Post">
+                            </div>
+                            <div class="recent-post-content">
+                                <h5>Top Web Development Trends to Watch in 2023</h5>
+                                <span>June 5, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags Widget -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Popular Tags</h4>
+                        <div class="tags-cloud">
+                            <a href="#" class="tag">Technology</a>
+                            <a href="#" class="tag">AI</a>
+                            <a href="#" class="tag">Web Development</a>
+                            <a href="#" class="tag">Mobile</a>
+                            <a href="#" class="tag">Cloud</a>
+                            <a href="#" class="tag">Data Analytics</a>
+                            <a href="#" class="tag">Business</a>
+                            <a href="#" class="tag">Innovation</a>
+                            <a href="#" class="tag">Digital Transformation</a>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Newsletter</h4>
+                        <p>Subscribe to our newsletter to get the latest updates directly in your inbox.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4"> 
+                    <h4>Contact us</h4>
+                    <p><i class="fa-solid fa-house"></i>111 Main street, kot radha kishan Lahore</p>
+                    <p><i class="fa-solid fa-envelope"></i>alihamzajuttchack55@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i>03706114094</p>
+                    <p><i class="fa-solid fa-globe"></i>www.company.com</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4>About us</h4>
+                    <p><i class="fa-solid fa-square-caret-right"></i>About us</p>
+                    <p><i class="fa-solid fa-square-caret-right"></i>Contact us</p>
+                    <p><i class="fa-solid fa-square-caret-right"></i>Term & Condition</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4>Stay in Touch</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <textarea name="subscribe" placeholder="Subscribe for our newsletter"></textarea>
+                    <button class="btn btn-primary">Sign up</button>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Company Name. All Rights Reserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <script>
+        // Add scroll event to change navbar style
+        $(window).scroll(function() {
+            if($(window).scrollTop() > 50) {
+                $('.navbar').addClass('navbar-scrolled');
+            } else {
+                $('.navbar').removeClass('navbar-scrolled');
+            }
+        });
+        
+        // Filter button functionality
+        $('.filter-btn').click(function() {
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            // Here you would typically filter the blog posts
+            // For this example, we'll just show a message
+            console.log('Filtering by: ' + $(this).text());
+        });
+        
+        // Add smooth scrolling to all links
+        $("a").on('click', function(event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function(){
+                    window.location.hash = hash;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
